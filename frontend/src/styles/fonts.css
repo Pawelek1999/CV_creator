@@ -1,0 +1,29 @@
+/* Self-hosted static (non-variable) Inter weights, embedded directly so the
+   CV never depends on system font resolution. Windows' Chrome sometimes
+   substitutes "Segoe UI Variable" for individual glyphs when relying on a
+   system font name (even an explicit one like Arial) — that variable font
+   doesn't embed correctly into printed PDFs, breaking text selection/search
+   and rendering some letters (esp. "l"/"I") at the wrong weight. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-Bold.ttf") format("truetype");
+}
