@@ -1,0 +1,24 @@
+# backend
+backend/.env
+backend/uploads/photos/*
+!backend/uploads/photos/.gitkeep
+backend/__pycache__/
+backend/*.db
+backend/venv/
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# working notes / project concept (private)
+Ai_content/
+
+# real personal data (only cv-data.example.json template is kept)
+Cv_content/cv-data.json
+Cv_content/*.png
+Cv_content/*.jpg
+Cv_content/*.jpeg
+
+# general
+.DS_Store

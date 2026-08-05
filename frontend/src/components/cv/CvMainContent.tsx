@@ -35,13 +35,13 @@ export function CvMainContent({ data }: CvMainContentProps) {
       </header>
 
       {summary && (
-        <MainSection title="O mnie">
+        <MainSection title="About Me">
           <p className="text-[0.875em] leading-relaxed text-justify [hyphens:auto]">{summary}</p>
         </MainSection>
       )}
 
       {experience.length > 0 && (
-        <MainSection title="Doświadczenie">
+        <MainSection title="Experience">
           <div className="space-y-[1em]">
             {experience.map((entry) => (
               <div key={`${entry.company}-${entry.role}-${entry.startDate}`}>
@@ -68,7 +68,7 @@ export function CvMainContent({ data }: CvMainContentProps) {
       )}
 
       {education.length > 0 && (
-        <MainSection title="Wykształcenie">
+        <MainSection title="Education">
           <div className="space-y-[0.75em]">
             {education.map((entry) => (
               <div key={`${entry.school}-${entry.degree}`}>
@@ -86,7 +86,7 @@ export function CvMainContent({ data }: CvMainContentProps) {
       )}
 
       {certifications.length > 0 && (
-        <MainSection title="Kursy i certyfikaty">
+        <MainSection title="Courses & Certifications">
           <div className="space-y-[0.5em]">
             {certifications.map((cert) => (
               <div key={cert.name} className="flex justify-between items-baseline gap-[1em]">

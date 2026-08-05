@@ -33,7 +33,7 @@ export function CvSidebar({ data }: CvSidebarProps) {
         className="w-[14.5em] h-[14.5em] rounded-full object-cover mx-auto ring-4 ring-blue-800"
       />
 
-      <SidebarSection title="Kontakt">
+      <SidebarSection title="Contact">
         <ul className="space-y-[0.375em] text-[0.875em] break-words">
           <li>{personalInfo.email}</li>
           <li>{personalInfo.phone}</li>
@@ -44,7 +44,7 @@ export function CvSidebar({ data }: CvSidebarProps) {
       </SidebarSection>
 
       {skills.length > 0 && (
-        <SidebarSection title="Umiejętności">
+        <SidebarSection title="Skills">
           <ul className="space-y-[0.375em] text-[0.875em]">
             {skills.map((skill) => (
               <li key={skill}>{skill}</li>
@@ -54,7 +54,7 @@ export function CvSidebar({ data }: CvSidebarProps) {
       )}
 
       {languages.length > 0 && (
-        <SidebarSection title="Języki">
+        <SidebarSection title="Languages">
           <ul className="space-y-[0.375em] text-[0.875em]">
             {languages.map((lang) => (
               <li key={lang}>{lang}</li>
@@ -64,7 +64,7 @@ export function CvSidebar({ data }: CvSidebarProps) {
       )}
 
       {interests.length > 0 && (
-        <SidebarSection title="Zainteresowania">
+        <SidebarSection title="Interests">
           <ul className="space-y-[0.375em] text-[0.875em]">
             {interests.map((interest) => (
               <li key={interest}>{interest}</li>

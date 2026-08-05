@@ -16,7 +16,7 @@ export function JsonEditor({ value, onChange, error }: JsonEditorProps) {
             ? "border-red-400 focus:ring-red-300"
             : "border-gray-300 focus:ring-blue-300"
         }`}
-        placeholder="Wklej JSON zgodny ze schematem CV..."
+        placeholder="Paste JSON matching the CV schema..."
       />
       {error && <p className="text-sm text-red-600">{error}</p>}
     </div>

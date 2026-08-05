@@ -15,11 +15,11 @@ export function CvPreview({ data }: CvPreviewProps) {
     <div className="w-[210mm] mx-auto">
       {overflowing && (
         <div className="print:hidden mb-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
-          Treść przekracza jedną stronę o ok. {overflowPercent}%
+          Content exceeds one page by about {overflowPercent}%
           {longestSection && (
             <>
               {" "}
-              — rozważ skrócenie sekcji <strong>„{longestSection}”</strong>.
+              — consider shortening the <strong>"{longestSection}"</strong> section.
             </>
           )}
         </div>
@@ -40,7 +40,7 @@ export function CvPreview({ data }: CvPreviewProps) {
             style={{ top: `${A4_HEIGHT_PX}px` }}
           >
             <span className="absolute right-0 -top-5 text-[11px] font-sans text-red-600 bg-white px-1">
-              koniec strony A4
+              end of A4 page
             </span>
           </div>
         )}

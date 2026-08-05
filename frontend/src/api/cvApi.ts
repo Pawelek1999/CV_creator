@@ -10,7 +10,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
   if (!response.ok) {
     const body = await response.json().catch(() => null);
-    throw new Error(body?.detail ?? `Żądanie nie powiodło się (HTTP ${response.status})`);
+    throw new Error(body?.detail ?? `Request failed (HTTP ${response.status})`);
   }
 
   if (response.status === 204) {

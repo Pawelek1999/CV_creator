@@ -11,7 +11,7 @@ function parseCvData(raw: string): { data: CvData | null; error: string | null }
     const parsed = JSON.parse(raw);
     return { data: parsed as CvData, error: null };
   } catch (err) {
-    return { data: null, error: err instanceof Error ? err.message : "Nieprawidłowy JSON" };
+    return { data: null, error: err instanceof Error ? err.message : "Invalid JSON" };
   }
 }
 
@@ -29,7 +29,7 @@ export function CvEditorPage() {
 
   useEffect(() => {
     if (isNew) {
-      setLabel("Nowe CV");
+      setLabel("New CV");
       setJsonText(JSON.stringify(masterCvData, null, 2));
       return;
     }
@@ -52,7 +52,7 @@ export function CvEditorPage() {
     const fullName = [firstName, lastName].filter(Boolean).join(" ");
     document.title = [fullName, "CV", label].filter(Boolean).join(" - ");
     return () => {
-      document.title = "Generator CV";
+      document.title = "CV Generator";
     };
   }, [parsedData, label]);
 
@@ -68,7 +68,7 @@ export function CvEditorPage() {
         await updateCv(Number(id), { label, data: parsedData });
       }
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : "Nie udało się zapisać CV.");
+      setSaveError(err instanceof Error ? err.message : "Failed to save CV.");
     } finally {
       setSaving(false);
     }
@@ -78,15 +78,15 @@ export function CvEditorPage() {
     window.print();
   }
 
-  if (loading) return <p className="text-center py-10 text-gray-500">Ładowanie...</p>;
+  if (loading) return <p className="text-center py-10 text-gray-500">Loading...</p>;
   if (loadError)
-    return <p className="text-center py-10 text-red-600">Błąd: {loadError}</p>;
+    return <p className="text-center py-10 text-red-600">Error: {loadError}</p>;
 
   return (
     <div className="max-w-7xl mx-auto py-6 px-4 print:p-0 print:max-w-none">
       <div className="flex items-center justify-between mb-4 print:hidden">
         <Link to="/" className="text-sm text-blue-700 hover:underline">
-          ← Wróć do listy
+          ← Back to list
         </Link>
         <div className="flex items-center gap-3">
           {saveError && <p className="text-sm text-red-600">{saveError}</p>}
@@ -96,7 +96,7 @@ export function CvEditorPage() {
             disabled={!parsedData}
             className="border border-blue-950 text-blue-950 text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-50 disabled:opacity-50"
           >
-            Pobierz PDF
+            Download PDF
           </button>
           <button
             type="button"
@@ -104,7 +104,7 @@ export function CvEditorPage() {
             disabled={saving || !parsedData}
             className="bg-blue-950 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-900 disabled:opacity-50"
           >
-            {saving ? "Zapisywanie..." : "Zapisz"}
+            {saving ? "Saving..." : "Save"}
           </button>
         </div>
       </div>
@@ -113,7 +113,7 @@ export function CvEditorPage() {
         type="text"
         value={label}
         onChange={(e) => setLabel(e.target.value)}
-        placeholder="Nazwa wersji (np. 'Pod ogłoszenie X')"
+        placeholder="Version name (e.g. 'For job posting X')"
         className="w-full mb-4 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 print:hidden"
       />
 
@@ -130,7 +130,7 @@ export function CvEditorPage() {
             </div>
           ) : (
             <p className="text-gray-500 text-sm">
-              Podgląd pojawi się, gdy JSON będzie poprawny.
+              The preview will appear once the JSON is valid.
             </p>
           )}
         </div>
