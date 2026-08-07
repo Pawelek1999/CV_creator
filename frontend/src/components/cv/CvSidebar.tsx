@@ -1,8 +1,11 @@
 import type { CvData } from "../../types/cv.types";
-import photoPlaceholder from "../../assets/photo-placeholder.svg";
+import profilePhoto from "../../assets/profile-photo.jpg";
+import { sectionTitles, type TitleLang } from "../../i18n/sectionTitles";
+
 
 interface CvSidebarProps {
   data: CvData;
+  titleLang: TitleLang;
 }
 
 function SidebarSection({
@@ -22,18 +25,18 @@ function SidebarSection({
   );
 }
 
-export function CvSidebar({ data }: CvSidebarProps) {
+export function CvSidebar({ data, titleLang }: CvSidebarProps) {
   const { personalInfo, skills, languages, interests } = data;
 
   return (
     <aside className="w-[34%] shrink-0 bg-blue-950 text-blue-50 px-[1.5em] py-[2em] flex flex-col gap-[1.75em]">
       <img
-        src={personalInfo.photoUrl || photoPlaceholder}
+        src={personalInfo.photoUrl || profilePhoto}
         alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
         className="w-[14.5em] h-[14.5em] rounded-full object-cover mx-auto ring-4 ring-blue-800"
       />
 
-      <SidebarSection title="Contact">
+      <SidebarSection title={sectionTitles.contact[titleLang]}>
         <ul className="space-y-[0.375em] text-[0.875em] break-words">
           <li>{personalInfo.email}</li>
           <li>{personalInfo.phone}</li>
@@ -44,7 +47,7 @@ export function CvSidebar({ data }: CvSidebarProps) {
       </SidebarSection>
 
       {skills.length > 0 && (
-        <SidebarSection title="Skills">
+        <SidebarSection title={sectionTitles.skills[titleLang]}>
           <ul className="space-y-[0.375em] text-[0.875em]">
             {skills.map((skill) => (
               <li key={skill}>{skill}</li>
@@ -54,7 +57,7 @@ export function CvSidebar({ data }: CvSidebarProps) {
       )}
 
       {languages.length > 0 && (
-        <SidebarSection title="Languages">
+        <SidebarSection title={sectionTitles.languages[titleLang]}>
           <ul className="space-y-[0.375em] text-[0.875em]">
             {languages.map((lang) => (
               <li key={lang}>{lang}</li>
@@ -64,7 +67,7 @@ export function CvSidebar({ data }: CvSidebarProps) {
       )}
 
       {interests.length > 0 && (
-        <SidebarSection title="Interests">
+        <SidebarSection title={sectionTitles.interests[titleLang]}>
           <ul className="space-y-[0.375em] text-[0.875em]">
             {interests.map((interest) => (
               <li key={interest}>{interest}</li>

@@ -2,12 +2,14 @@ import type { CvData } from "../../types/cv.types";
 import { CvSidebar } from "./CvSidebar";
 import { CvMainContent } from "./CvMainContent";
 import { useAutoFitPage, A4_HEIGHT_PX } from "../../hooks/useAutoFitPage";
+import type { TitleLang } from "../../i18n/sectionTitles";
 
 interface CvPreviewProps {
   data: CvData;
+  titleLang?: TitleLang;
 }
 
-export function CvPreview({ data }: CvPreviewProps) {
+export function CvPreview({ data, titleLang = "en" }: CvPreviewProps) {
   const { pageRef, fontSizePx, overflowing, overflowPercent, longestSection } =
     useAutoFitPage([data]);
 
@@ -32,8 +34,8 @@ export function CvPreview({ data }: CvPreviewProps) {
         }}
         className="relative w-full min-h-[297mm] flex shadow-lg print:shadow-none"
       >
-        <CvSidebar data={data} />
-        <CvMainContent data={data} />
+        <CvSidebar data={data} titleLang={titleLang} />
+        <CvMainContent data={data} titleLang={titleLang} />
         {overflowing && (
           <div
             className="print:hidden absolute left-0 right-0 border-t-2 border-dashed border-red-500"

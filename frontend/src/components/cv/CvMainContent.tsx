@@ -1,8 +1,10 @@
 import type { CvData } from "../../types/cv.types";
 import { formatDate, formatDateRange } from "../../utils/formatDate";
+import { sectionTitles, type TitleLang } from "../../i18n/sectionTitles";
 
 interface CvMainContentProps {
   data: CvData;
+  titleLang: TitleLang;
 }
 
 function MainSection({
@@ -22,7 +24,7 @@ function MainSection({
   );
 }
 
-export function CvMainContent({ data }: CvMainContentProps) {
+export function CvMainContent({ data, titleLang }: CvMainContentProps) {
   const { personalInfo, summary, experience, education, certifications } = data;
 
   return (
@@ -35,13 +37,13 @@ export function CvMainContent({ data }: CvMainContentProps) {
       </header>
 
       {summary && (
-        <MainSection title="About Me">
+        <MainSection title={sectionTitles.aboutMe[titleLang]}>
           <p className="text-[0.875em] leading-relaxed text-justify [hyphens:auto]">{summary}</p>
         </MainSection>
       )}
 
       {experience.length > 0 && (
-        <MainSection title="Experience">
+        <MainSection title={sectionTitles.experience[titleLang]}>
           <div className="space-y-[1em]">
             {experience.map((entry) => (
               <div key={`${entry.company}-${entry.role}-${entry.startDate}`}>
@@ -68,7 +70,7 @@ export function CvMainContent({ data }: CvMainContentProps) {
       )}
 
       {education.length > 0 && (
-        <MainSection title="Education">
+        <MainSection title={sectionTitles.education[titleLang]}>
           <div className="space-y-[0.75em]">
             {education.map((entry) => (
               <div key={`${entry.school}-${entry.degree}`}>
@@ -86,7 +88,7 @@ export function CvMainContent({ data }: CvMainContentProps) {
       )}
 
       {certifications.length > 0 && (
-        <MainSection title="Courses & Certifications">
+        <MainSection title={sectionTitles.certifications[titleLang]}>
           <div className="space-y-[0.5em]">
             {certifications.map((cert) => (
               <div key={cert.name} className="flex justify-between items-baseline gap-[1em]">

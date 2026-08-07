@@ -10,6 +10,9 @@ backend/venv/
 frontend/node_modules/
 frontend/dist/
 frontend/.env
+frontend/public/profile-photo.png
+frontend/src/assets/profile-photo.jpg
+frontend/src/data/cv-data.json
 
 # working notes / project concept (private)
 Ai_content/
