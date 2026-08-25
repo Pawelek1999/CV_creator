@@ -54,6 +54,21 @@ npm run dev
 The frontend starts at `http://localhost:5173` and talks to the backend via
 the address in `VITE_API_BASE_URL` (defaults to `http://localhost:8000`).
 
+## Running with Docker
+
+```
+docker compose up --build
+```
+
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:8000` (API docs at `/docs`)
+
+The backend container runs `alembic upgrade head` on every startup, which
+creates the SQLite database (and applies any pending migrations) if it
+doesn't exist yet, or does nothing if it's already up to date. The database
+file lives in the `backend_data` named volume, so data survives container
+restarts and rebuilds — use `docker compose down -v` to wipe it.
+
 ## Project structure
 
 ```

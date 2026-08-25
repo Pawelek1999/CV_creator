@@ -50,7 +50,7 @@ export function CvMainContent({ data, titleLang }: CvMainContentProps) {
                 <div className="flex justify-between items-baseline gap-[1em]">
                   <h3 className="font-semibold text-[1.05em]">{entry.role}</h3>
                   <span className="text-[0.75em] text-gray-500 whitespace-nowrap">
-                    {formatDateRange(entry.startDate, entry.endDate)}
+                    {formatDateRange(entry.startDate, entry.endDate, titleLang)}
                   </span>
                 </div>
                 <p className="text-[0.875em] text-blue-700">
@@ -77,7 +77,7 @@ export function CvMainContent({ data, titleLang }: CvMainContentProps) {
                 <div className="flex justify-between items-baseline gap-[1em]">
                   <h3 className="font-semibold text-[1.05em]">{entry.degree}</h3>
                   <span className="text-[0.75em] text-gray-500 whitespace-nowrap">
-                    {formatDateRange(entry.startDate, entry.endDate)}
+                    {formatDateRange(entry.startDate, entry.endDate, titleLang)}
                   </span>
                 </div>
                 <p className="text-[0.875em] text-blue-700">{entry.school}</p>
@@ -94,7 +94,7 @@ export function CvMainContent({ data, titleLang }: CvMainContentProps) {
               <div key={cert.name} className="flex justify-between items-baseline gap-[1em]">
                 <h3 className="font-semibold text-[1.05em]">{cert.name}</h3>
                 <span className="text-[0.75em] text-gray-500 whitespace-nowrap">
-                  {formatDate(cert.date)}
+                  {formatDate(cert.date, titleLang)}
                 </span>
               </div>
             ))}
