@@ -47,3 +47,5 @@ export interface CvRecord {
   created_at: string;
   updated_at: string;
 }
+
+export type CvTemplate = "classic" | "ats";

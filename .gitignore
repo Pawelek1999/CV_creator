@@ -17,11 +17,6 @@ frontend/src/data/cv-data.json
 # working notes / project concept (private)
 Ai_content/
 
-# real personal data (only cv-data.example.json template is kept)
-Cv_content/cv-data.json
-Cv_content/*.png
-Cv_content/*.jpg
-Cv_content/*.jpeg
 
 # general
 .DS_Store

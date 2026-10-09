@@ -3,7 +3,8 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { createCv, getCv, updateCv } from "../api/cvApi";
 import { JsonEditor } from "../components/editor/JsonEditor";
 import { CvPreview } from "../components/cv/CvPreview";
-import type { CvData } from "../types/cv.types";
+import { CvAtsPreview } from "../components/cv/CvAtsPreview";
+import type { CvData, CvTemplate } from "../types/cv.types";
 import masterCvData from "../data/cv-data.json";
 import type { TitleLang } from "../i18n/sectionTitles";
 
@@ -14,6 +15,35 @@ function parseCvData(raw: string): { data: CvData | null; error: string | null }
   } catch (err) {
     return { data: null, error: err instanceof Error ? err.message : "Invalid JSON" };
   }
+}
+
+function SegmentedToggle<T extends string>({
+  options,
+  value,
+  onChange,
+}: {
+  options: { value: T; label: string }[];
+  value: T;
+  onChange: (value: T) => void;
+}) {
+  return (
+    <div className="flex items-center border border-blue-950 rounded-md overflow-hidden text-sm font-medium">
+      {options.map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          onClick={() => onChange(option.value)}
+          className={
+            value === option.value
+              ? "px-3 py-2 bg-blue-950 text-white"
+              : "px-3 py-2 text-blue-950 hover:bg-blue-50"
+          }
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 export function CvEditorPage() {
@@ -28,6 +58,7 @@ export function CvEditorPage() {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [titleLang, setTitleLang] = useState<TitleLang>("en");
+  const [template, setTemplate] = useState<CvTemplate>("ats");
 
   useEffect(() => {
     if (isNew) {
@@ -92,30 +123,22 @@ export function CvEditorPage() {
         </Link>
         <div className="flex items-center gap-3">
           {saveError && <p className="text-sm text-red-600">{saveError}</p>}
-          <div className="flex items-center border border-blue-950 rounded-md overflow-hidden text-sm font-medium">
-            <button
-              type="button"
-              onClick={() => setTitleLang("en")}
-              className={
-                titleLang === "en"
-                  ? "px-3 py-2 bg-blue-950 text-white"
-                  : "px-3 py-2 text-blue-950 hover:bg-blue-50"
-              }
-            >
-              ENG
-            </button>
-            <button
-              type="button"
-              onClick={() => setTitleLang("pl")}
-              className={
-                titleLang === "pl"
-                  ? "px-3 py-2 bg-blue-950 text-white"
-                  : "px-3 py-2 text-blue-950 hover:bg-blue-50"
-              }
-            >
-              PL
-            </button>
-          </div>
+          <SegmentedToggle
+            options={[
+              { value: "classic", label: "Classic" },
+              { value: "ats", label: "ATS" },
+            ]}
+            value={template}
+            onChange={setTemplate}
+          />
+          <SegmentedToggle
+            options={[
+              { value: "en", label: "ENG" },
+              { value: "pl", label: "PL" },
+            ]}
+            value={titleLang}
+            onChange={setTitleLang}
+          />
           <button
             type="button"
             onClick={handlePrint}
@@ -151,7 +174,11 @@ export function CvEditorPage() {
           {parsedData ? (
             <div className="relative w-109.25 h-154.5 mx-auto print:w-auto print:h-auto print:mx-0">
               <div className="absolute top-0 left-0 origin-top-left scale-[0.55] print:static print:scale-100 print:transform-none">
-                <CvPreview data={parsedData} titleLang={titleLang} />
+                {template === "ats" ? (
+                  <CvAtsPreview data={parsedData} titleLang={titleLang} />
+                ) : (
+                  <CvPreview data={parsedData} titleLang={titleLang} />
+                )}
               </div>
             </div>
           ) : (
